@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row m-4">
+    <div class="col-md-4">
+      <label for="country"><b>Country</b></label> <br />
+      <label for="city"><b>City</b></label> <br />
+      <label for="type"><b>Type</b></label> <br />
+      <br />
+      <br />
+      <label for="profit"><b>Profit </b></label> <br />
+      <label for="driverProfit"><b>Driver Profit</b></label> <br />
+      <label for="minFare"><b>Min. Fare</b></label> <br />
+      <label for="distanceBasePrice"><b>Distance for Base Price</b></label>
+      <br />
+      <label for="basePrice"><b>Base Price</b></label> <br />
+      <label for="pricePerUnitDistance"><b>Price Per Unit Distance</b></label>
+      <br />
+      <label for="pricePerUnitTime"><b>Price Per Unit Time (min)</b></label>
+      <br />
+      <label for="maxSpace"><b>Max Space</b></label> <br />
+    </div>
+    <div class="col-md-5">
+      <select (change)="onCountryChange($event.target.value)">
+        <option value="" disabled selected>Select a country</option>
+        <option *ngFor="let country of existingCountry" [value]="country.name">
+          {{ country.name }}
+        </option>
+      </select>
+      <br />
+      <select>
+        <option value="" disabled selected>Select Zone</option>
+        <option *ngFor="let city of selectedCountry?.city">{{ city }}</option>
+      </select>
+      <br />
+      <select name="type" id="vechicletype">
+        <option value="" disabled selected>Select Vehicle Type</option>
+        <option *ngFor="let type of vehicleType">{{ type }}</option>
+      </select>
+      <br />
+      <br />
+      <br />
+      <input type="text" id="profit" /> <br />
+      <input type="text" id="driverProfit" /> <br />
+      <input type="text" id="minFare" /> <br />
+      <input type="text" id="distanceBasePrice" /> <br />
+      <input type="text" id="basePrice" /> <br />
+      <input type="text" id="pricePerUnitDistance" /> <br />
+      <input type="text" id="pricePerUnitTime" /> <br />
+      <input type="text" id="maxSpace" /> <br />
+    </div>
+  </div>
+</div>

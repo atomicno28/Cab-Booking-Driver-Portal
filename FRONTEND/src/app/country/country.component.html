@@ -1,0 +1,116 @@
+<div class="row p-2">
+  <div class="col-md-2">
+    <!-- Button to popup the modal  -->
+    <button class="btn btn-lg btn-primary p-2 m-2" (click)="open(content)">
+      Add Country
+    </button>
+  </div>
+  <div class="col-md-3 m-3">
+    <!-- search input -->
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search country"
+        [(ngModel)]="searchText"
+      />
+    </div>
+  </div>
+</div>
+
+<p class="m-2 text-secondary" *ngIf="!countries.length">
+  No country has been added yet, Add using the 'Add Country' button
+</p>
+<!-- Show the country's data inside this div asynchronously., any changes should reflect it here without reloading the page-->
+<div
+  class="m-3 mt-1"
+  *ngFor="let country of countries | filter : searchText : 'Name'"
+>
+  <h2>{{ country.Name }}</h2>
+  <p><b>Country code: </b>{{ country.CountryCode }}</p>
+  <p><b>Calling code: </b>{{ country.CountryCallingCode }}</p>
+  <p><b>Currency: </b>{{ country.Currency }}</p>
+  <p><b>Timezone: </b>{{ country.TimeZone }}</p>
+  <hr />
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Add Country</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <!-- Content inside the modal body 1 -->
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="country">Country</label>
+        <input
+          type="text"
+          class="form-control"
+          id="country"
+          [(ngModel)]="country"
+          (input)="onCountryChange($event.target.value)"
+          name="country"
+        />
+        <div
+          *ngFor="let suggestion of countrySuggestions"
+          (click)="onCountrySelect(suggestion)"
+        >
+          {{ suggestion.name.common }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="currency">Currency</label>
+        <input
+          type="text"
+          class="form-control"
+          id="currency"
+          [(ngModel)]="currency"
+          name="currency"
+        />
+      </div>
+      <div class="form-group">
+        <label for="countryCode">Country Code</label>
+        <input
+          type="text"
+          class="form-control"
+          id="countryCode"
+          [(ngModel)]="countryCode"
+          name="countryCode"
+        />
+      </div>
+      <div class="form-group">
+        <label for="callingCode">Country Calling Code</label>
+        <input
+          type="text"
+          class="form-control"
+          id="callingCode"
+          [(ngModel)]="callingCode"
+          name="callingCode"
+        />
+      </div>
+      <div *ngIf="validationMessage" class="alert alert-danger">
+        {{ validationMessage }}
+      </div>
+      <button type="button" class="btn btn-primary" (click)="addCountry()">
+        Add Country
+      </button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>

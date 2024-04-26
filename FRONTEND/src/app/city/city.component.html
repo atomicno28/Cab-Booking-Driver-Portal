@@ -1,0 +1,18 @@
+<div class="p-3">
+  <label><b>Country:</b></label> <br />
+  <select (change)="onCountryChange($event.target.value)">
+    <option value="" disabled selected>Select a country</option>
+    <option *ngFor="let country of savedCountry" [value]="country.Name">
+      {{ country.Name }}
+    </option>
+  </select>
+  <br />
+  <label for=""><b>Zone:</b> </label> <br />
+  <input type="text" #zoneInput /> <br />
+  <button class="btn btn-outline-secondary mt-2" (click)="addZone()">
+    Add Zone
+  </button>
+  <div *ngIf="responseMessage" class="mt-2">
+    {{ responseMessage }}
+  </div>
+</div>

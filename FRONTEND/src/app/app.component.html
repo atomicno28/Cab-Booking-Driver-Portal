@@ -1,0 +1,55 @@
+<app-sidebar
+  *ngIf="isUserLoggedIn; else loggedOutTemplate"
+  (logoutEvent)="logout()"
+></app-sidebar>
+<ng-template #loggedOutTemplate>
+  <div class="container m-3 p-3">
+    <div class="row justify-content-center mt-5 p-5 align-item-center">
+      <div class="col-md-4">
+        <h2>Register</h2>
+        <input
+          type="text"
+          name="username"
+          placeholder="username"
+          [(ngModel)]="Register.username"
+        />
+        <br />
+        <input
+          type="password"
+          name="password"
+          placeholder="password"
+          [(ngModel)]="Register.password"
+        />
+        <p class="text-danger mb-0" *ngIf="Register.errorMessage">
+          {{ Register.errorMessage }}
+        </p>
+        <br />
+        <button class="btn btn-outline-secondary" (click)="register()">
+          Register
+        </button>
+      </div>
+
+      <div class="col-md-4">
+        <h2>Login</h2>
+        <input
+          type="text"
+          name="username"
+          placeholder="username"
+          [(ngModel)]="Login.username"
+        />
+        <br />
+        <input
+          type="password"
+          name="password"
+          placeholder="password"
+          [(ngModel)]="Login.password"
+        />
+        <p class="text-danger" *ngIf="Login.errorMessage">
+          {{ Login.errorMessage }}
+        </p>
+        <br />
+        <button class="btn btn-outline-success" (click)="login()">Login</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,74 @@
+<div class="container mt-5" style="max-width: 400px">
+  <label for="vehicleType" class="d-block">Vehicle Type:</label>
+  <select
+    id="vehicleType"
+    name="vehicleType"
+    class="form-control d-block"
+    [(ngModel)]="vehicleType"
+  >
+    <option value="" disabled selected>Select a Vehicle Type</option>
+    <option value="Sedan">Sedan</option>
+    <option value="SUV">SUV (Sports Utility Vehicle)</option>
+    <option value="Minivan">Minivan</option>
+    <option value="Electric">Electric Vehicle (EV)</option>
+    <option value="Hybrid">Hybrid Vehicle</option>
+  </select>
+  <p class="text-danger" *ngIf="typeError">{{ typeError }}</p>
+
+  <label for="name" class="d-block">Name:</label>
+  <input
+    type="text"
+    name="name"
+    placeholder="Vehicle Name..."
+    class="form-control d-block"
+    [(ngModel)]="vehicleName"
+  />
+  <p class="text-danger" *ngIf="nameError">{{ nameError }}</p>
+
+  <label for="icon" class="d-block">Icon:</label>
+  <input
+    type="file"
+    name="icon"
+    accept="image/*"
+    class="form-control-file d-block"
+    style="margin-bottom: 10px"
+    (change)="onFileSelected($event)"
+  />
+  <p class="text-danger" *ngIf="iconError">{{ iconError }}</p>
+
+  <button class="btn btn-outline-primary d-block" (click)="addVehicle()">
+    Add Vehicle
+  </button>
+
+  <p class="text-danger" *ngIf="serverError">{{ serverError }}</p>
+</div>
+
+<div class="row" *ngIf="vehicles.length > 0" class="mt-3">
+  <h5>Uploaded Vehicles:</h5>
+  <div class="row" *ngFor="let vehicle of vehicles; let i = index">
+    <div class="col-md-2">
+      <div class="mb-2"><strong>Type:</strong> {{ vehicle.vehicleTypes }}</div>
+      <div class="mb-2"><strong>Name:</strong> {{ vehicle.name }}</div>
+      <div>
+        <strong>Logo: </strong>
+        <img
+          src="{{ vehicle.logo }}"
+          alt="Vehicle Icon"
+          style="max-width: 50px; max-height: 50px"
+        />
+      </div>
+      <button
+        class="btn btn-outline-secondary d-block"
+        (click)="editVehicle(vehicle._id)"
+      >
+        Edit Vehicle
+      </button>
+      <button
+        class="btn btn-outline-secondary d-block"
+        (click)="updateVehicle(vehicle._id)"
+      >
+        Update Vehicle
+      </button>
+    </div>
+  </div>
+</div>
